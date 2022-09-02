@@ -117,18 +117,3 @@ ALTER TABLE media_in_posts ADD id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY K
 ALTER TABLE media_who_likes ADD id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY;
 ALTER TABLE posts_who_likes ADD id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY;
 ALTER TABLE users_who_likes ADD id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY;
-
-SELECT * FROM users;
-SELECT * FROM profiles;
-SELECT * FROM user_statuses;
-SELECT * FROM media;
-SELECT * FROM media_in_posts;
-SELECT * FROM media_types;
-SELECT * FROM extensions;
-SELECT * FROM friendships;
-SELECT * FROM friendship_statuses;
-SELECT * FROM communities;
-SELECT * FROM communities_users;
-SELECT COUNT(*) FROM communities;
-UPDATE media SET metadata = "1";
-UPDATE media SET filename = "";
