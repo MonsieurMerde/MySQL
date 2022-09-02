@@ -25,12 +25,12 @@ TRUNCATE user_statuses;
 INSERT INTO user_statuses (name) VALUES
 ('Not chosen'),
 ('Not married'),
-('Difficult'),
 ('Actively looking'),
 ('I meet with'),
 ('Engaged'),
 ('Married'),
 ('Civil marriage'),
+('Difficult'),
 ('In love with');
 
 SELECT * FROM user_statuses;
@@ -43,7 +43,7 @@ UPDATE profiles SET user_status_id = FLOOR(1 + RAND() * 9);
 UPDATE profiles SET relationships_with = FLOOR(1 + RAND() * 100);
 UPDATE profiles SET relationships_with = relationships_with + 1 WHERE user_id = relationships_with;
 
-UPDATE profiles SET relationships_with = NULL WHERE user_status_id < 5;
+UPDATE profiles SET relationships_with = NULL WHERE user_status_id < 4;
 UPDATE profiles SET relationships_with = NULL ORDER BY RAND() LIMIT 20;
 
 UPDATE messages SET updated_at = created_at WHERE updated_at < created_at;
