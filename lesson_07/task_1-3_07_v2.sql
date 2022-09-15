@@ -1,3 +1,5 @@
+-- С использованием JOIN
+
 -- ПЗ 1. Составьте список пользователей users, которые осуществили хотя бы один заказ orders в интернет-магазине.
 
 USE shop;
@@ -17,24 +19,26 @@ INSERT INTO orders(id, user_id) VALUES
   
 UPDATE orders SET user_id = FLOOR(1 + RAND() * 6);
 
-SELECT name FROM users
-WHERE id IN (SELECT user_id FROM orders);
+SELECT users.name FROM users
+JOIN orders
+ON users.id = orders.user_id
+GROUP BY users.name;
 
 
 -- ПЗ 2. Выведите список товаров products и разделов catalogs, который соответствует товару.
 
-USE shop; 
+USE shop;
 
-SELECT products.name,
-(SELECT catalogs.name FROM catalogs WHERE id = catalog_id) AS 'catalog_name'
-FROM products;
+SELECT products.name, catalogs.name AS catalog_name FROM products
+JOIN catalogs
+ON products.catalog_id = catalogs.id;
 
 
 -- ПЗ 3. Пусть имеется таблица рейсов flights (id, from, to) и таблица городов cities (label, name). 
 -- Поля from, to и label содержат английские названия городов, поле name — русское.
--- Выведите список рейсов flights с русскими названиями городов. 
+-- Выведите список рейсов flights с русскими названиями городов.
 
-USE shop;
+USE shop; 
 
 DROP TABLE IF EXISTS flights;
 CREATE TABLE flights (
@@ -62,8 +66,12 @@ CREATE TABLE cities (
   ('novgorod', 'Новгород'),
   ('kazan', 'Казань'),
   ('omsk', 'Омск');
-  
-SELECT id,
-(SELECT name FROM cities WHERE label = `from`) AS `from`,
-(SELECT name FROM cities WHERE label = `to`) AS `to`
-FROM flights;
+
+UPDATE flights
+JOIN cities AS cities_from
+ON flights.from = cities_from.label
+JOIN cities AS cities_to
+ON flights.to = cities_to.label
+SET
+flights.from = cities_from.name,
+flights.to = cities_to.name;
