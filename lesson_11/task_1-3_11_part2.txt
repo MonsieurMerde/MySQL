@@ -8,7 +8,7 @@ HINCRBY ip '127.0.0.2' 1
 
 HINCRBY ip '127.0.0.3' 2
 
-> HINCRBY ip '127.0.0.2' 4
+HINCRBY ip '127.0.0.2' 4
 
 HGETALL ip
 
